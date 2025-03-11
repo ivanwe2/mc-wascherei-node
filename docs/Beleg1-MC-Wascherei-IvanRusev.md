@@ -19,7 +19,7 @@ _Datum: 12.03.25_
 
 **Scenario**: 
     Ein Freund, der eine Wascherei im Studentenstadt hat, mochtet sein Business optimieren. Er hat 20 kombinierte Wasch/Trockenmaschine und insgesamt 100 Kunden pro tag(+- 20). Sein grosstes Problem ist, dass am Wochenend zu viele Kunden reinkommen(bis zu 40%), und er kann nicht alles schaffen und verliert seine Kliente => weniger Profit. Wir mochten diese Kunden wahrend der Woche bedienen, deshalb schlagen wir folgendes vor:
-    Ein Rabatt am Wochentage 10%, und 20% am Freitag, dann kommen weniger Kunden am Wochenende(20%). Der Waschereichef mochtet ein Vergleich zwischen seinen jetzigen Model und unser.
+    Ein Rabatt am Wochentage 10%, und 20% am Freitag, dann kommen weniger Kunden am Wochenende(20%) und mehr wahrend die Wochentagen(10%). Der Waschereichef mochtet ein Vergleich zwischen seinen jetzigen Model und unser.
 
 
 ## <p id="simulation">Simulation</p>  
@@ -51,6 +51,7 @@ Die Simulation nutzt folgende Parameter:
 ### <p id="ergebnisse-charts">Charts</p>  
 
 ![Charts](assets/ergebnisse-charts.png)
+Die Website ist [hier.](https://mc-wascherei-node.onrender.com/)
 
 ### <p id="ergebnisse-json">JSON</p>  
 

@@ -6,6 +6,9 @@
     Created using Node.js and Express with simple static UI that utilizes
     ChartsJs for seamless chart visualization.
 
+    Deployed on a public cloud provider Render.
+
 ## Einheit
 - [Docs](/docs/Beleg1-MC-Wascherei-IvanRusev.md)
 - [Source Code](/src/simulation/sim.js)
+- [Deployment](https://mc-wascherei-node.onrender.com/)

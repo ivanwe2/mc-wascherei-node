@@ -53,7 +53,7 @@ function runMonteCarloSim() {
             const numberOfCustomersNoDiscount = Math.round(DAILY_CUSTOMER_TARGET * weekendBoostNoDiscount * randomVariation);
             
             // For DISCOUNT scenario - reduced weekend boost, increased weekday traffic
-            const weekdayBoostWithDiscount = 1.15; // 15% boost on weekdays with discounts
+            const weekdayBoostWithDiscount = 1.10; // 10% boost on weekdays with discounts
             const weekendBoostWithDiscount = 1.2; // Only 20% vs 40% without discounts
             const totalBoostWithDiscount = isWeekend
                 ? weekendBoostWithDiscount
