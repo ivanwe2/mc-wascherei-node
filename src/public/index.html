@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wascherei Sim</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        div {
+            canvas {
+                max-width: 300px;
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <p>Wascherei Monte Carlo simulation</p>
+    <div style="margin: auto; width: 80%; height: 60%; display: flex; flex-wrap: wrap; justify-content: space-around;">
+        <canvas id="revenueChart" width="200" height="300"></canvas>
+        <canvas id="profitChart" width="200" height="300"></canvas>
+        <canvas id="customersChart" width="200" height="300"></canvas>
+        <canvas id="lostCustomersChart" width="200" height="300"></canvas>
+        <canvas id="lostRevenueChart" width="200" height="300"></canvas>
+    </div>
+
+    <br/>
+    <button id="json-data-btn" type="button">Daten als JSON</button>
+    <pre id="dataOutput" hidden>Loading...</pre>
+
+    <script>
+        const API_URL = window.location.origin.includes("localhost")
+            ? "http://localhost:3000"  // Local server in dev mode
+            : window.location.origin;  // Use same domain in production
+
+        async function fetchData() {
+            try {
+                const response = await fetch(`${API_URL}/data`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                generateCharts(data);
+
+                document.getElementById("dataOutput").textContent = JSON.stringify(data, null, 2);
+
+                document.getElementById('json-data-btn').addEventListener('click', () => {
+                    document.getElementById("dataOutput").hidden = !document.getElementById("dataOutput").hidden;
+                });
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById("dataOutput").textContent = "Failed to load data.";
+            }
+        }
+
+        function generateCharts(data) {
+            const dataWithoutDiscounts = data.withoutDiscounts;
+            const dataWithDiscounts = data.withDiscounts;
+
+            const labels = dataWithoutDiscounts.map(item => item.dayOfWeek);
+
+            const revenueWithoutDiscounts = dataWithoutDiscounts.map(item => parseFloat(item.averageRevenue));
+            const revenueWithDiscounts = dataWithDiscounts.map(item => parseFloat(item.averageRevenue));
+
+            const profitWithoutDiscounts = dataWithoutDiscounts.map(item => parseFloat(item.averageProfit));
+            const profitWithDiscounts = dataWithDiscounts.map(item => parseFloat(item.averageProfit));
+
+            const customersWithoutDiscounts = dataWithoutDiscounts.map(item => parseFloat(item.averageCustomers));
+            const customersWithDiscounts = dataWithDiscounts.map(item => parseFloat(item.averageCustomers));
+
+            const lostCustomersWithoutDiscounts = dataWithoutDiscounts.map(item => parseFloat(item.averageLostCustomers));
+            const lostCustomersWithDiscounts = dataWithDiscounts.map(item => parseFloat(item.averageLostCustomers));
+
+            const lostRevenueWithoutDiscounts = dataWithoutDiscounts.map(item => parseFloat(item.averageLostRevenue));
+            const lostRevenueWithDiscounts = dataWithDiscounts.map(item => parseFloat(item.averageLostRevenue));
+
+            const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRevenue, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Revenue Without Discounts',
+                    data: revenueWithoutDiscounts,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Revenue With Discounts',
+                    data: revenueWithDiscounts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                responsive: true,
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+
+            const ctxProfit = document.getElementById('profitChart').getContext('2d');
+            new Chart(ctxProfit, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Profit Without Discounts',
+                    data: profitWithoutDiscounts,
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Profit With Discounts',
+                    data: profitWithDiscounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                responsive: true,
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+
+            const ctxCustomers = document.getElementById('customersChart').getContext('2d');
+            new Chart(ctxCustomers, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Customers Without Discounts',
+                    data: customersWithoutDiscounts,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Customers With Discounts',
+                    data: customersWithDiscounts,
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                responsive: true,
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+
+            const ctxLostCustomers = document.getElementById('lostCustomersChart').getContext('2d');
+            new Chart(ctxLostCustomers, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Lost Customers Without Discounts',
+                    data: lostCustomersWithoutDiscounts,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Lost Customers With Discounts',
+                    data: lostCustomersWithDiscounts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                responsive: true,
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+
+            const ctxLostRevenue = document.getElementById('lostRevenueChart').getContext('2d');
+            new Chart(ctxLostRevenue, {
+                type: 'bar',
+                data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Lost Revenue Without Discounts',
+                    data: lostRevenueWithoutDiscounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Lost Revenue With Discounts',
+                    data: lostRevenueWithDiscounts,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                responsive: true,
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
