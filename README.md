@@ -1,11 +1,7 @@
-# mc-wascherei-node
-# [Beleg 1] Monte Carlo Simulation einer Wascherei
-_Ersteller: Ivan Rusev 201222009_ 
+# Monte Carlo Simulation einer Wascherei
 
-_Datum: 11.03.25_
+    This repository contains the source code and documentation for the
+    Monte Carlo Simulation Homework in course Discrete Simulation '25.
 ## Einheit
-- [Aufgabenstellung](#aufgabe)
-    - [Parameter]()
-- [Simulation](#simulation)
-- [Ergebnisse](#ergebnisse)
-- [Code](#code)
+- [Docs](/docs/Beleg1-MC-Wascherei-IvanRusev.md)
+- [Source Code](/src/index.js)
