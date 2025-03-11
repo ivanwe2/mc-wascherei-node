@@ -3,14 +3,13 @@ function runMonteCarloSim() {
     const SIMULATION_DAYS = 7;
     
     const MACHINES_AVAILABLE = 20;
-    const BASE_STUDENTS = 150;
     
     // Operating hours parameters
     const OPERATING_HOURS = 24; // Laundromat open 24 hours
     const AVG_MACHINE_USAGE_HOURS = 4; // Average time a customer uses a machine
     const DAILY_CUSTOMER_TARGET = 100; // Target number of customers per day
 
-    // Different programs cost more or less but take the same amount of time
+    // Different wash programs cost more or less but take the same amount of time
     const AVG_SPEND_PER_STUDENT = 8;
     const STD_DEV_SPEND = 2;
 
@@ -55,7 +54,7 @@ function runMonteCarloSim() {
             
             // For DISCOUNT scenario - reduced weekend boost, increased weekday traffic
             const weekdayBoostWithDiscount = 1.15; // 15% boost on weekdays with discounts
-            const weekendBoostWithDiscount = 1.2; // Only 20% boost on weekends (vs 40% without discounts)
+            const weekendBoostWithDiscount = 1.2; // Only 20% vs 40% without discounts
             const totalBoostWithDiscount = isWeekend
                 ? weekendBoostWithDiscount
                 : weekdayBoostWithDiscount;
