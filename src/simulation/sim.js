@@ -2,7 +2,7 @@ function runMonteCarloSim() {
     const SIMULATION_RUNS = 30;
     const SIMULATION_DAYS = 7;
     
-    const MACHINES_AVAILABLE = 24;
+    const MACHINES_AVAILABLE = 20;
     
     // Operating hours parameters
     const OPERATING_HOURS = 24; // Laundromat open 24 hours

@@ -70,4 +70,4 @@ Die Website ist [hier.](https://mc-wascherei-node.onrender.com/)
     Eine mögliche Preisstrategie wäre es, während der Woche Rabatte 
     anzubieten, um die Auslastung zu steigern und den Umsatz zu erhöhen.
 4. **Kunden behalten**: 
-    Jede Wochenende verliert die Wascherei mindestens 10-20 Kunden, und deshalb sinkt die Profit in der Zukunft. Mit dem neuen Model passiert dieselbe Verlust im 10 Wochen, die ist genug Zeit neue Kunden zu bekommen.
+    Jede Wochenende verliert die Wascherei mindestens 5-6 Kunden, und deshalb sinkt die Profit in der Zukunft.
