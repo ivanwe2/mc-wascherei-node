@@ -1,0 +1,14 @@
+{
+  "name": "beleg1-ivanrusev",
+  "version": "1.0.0",
+  "description": "MC Simulation for a Laundry",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Rusev",
+  "license": "ISC"
+}

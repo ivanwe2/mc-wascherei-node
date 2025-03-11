@@ -1,4 +1,3 @@
-# mc-wascherei-node
 # [Beleg 1] Monte Carlo Simulation einer Wascherei
 _Ersteller: Ivan Rusev 201222009_ 
 
