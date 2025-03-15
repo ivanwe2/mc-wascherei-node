@@ -10,16 +10,104 @@
             max-width: 300px;
             max-height: 300px;
         }
+        .container-summary {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+        .summary {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .language-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .language-btn:hover {
+            background-color: #2980b9;
+        }
+        .chart-point {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <p>Wascherei Monte Carlo simulation</p>
+    <h1>Wascherei Monte Carlo simulation</h1>
+    <br/>
     <div style="margin: auto; width: 80%; height: 60%; display: flex; flex-wrap: wrap; justify-content: space-around;">
         <canvas id="revenueChart" width="200" height="300"></canvas>
         <canvas id="profitChart" width="200" height="300"></canvas>
         <canvas id="customersChart" width="200" height="300"></canvas>
         <canvas id="lostCustomersChart" width="200" height="300"></canvas>
         <canvas id="lostRevenueChart" width="200" height="300"></canvas>
+    </div>
+    <br/>
+    <div class="container-summary">
+        <div id="germanSummary" class="summary">
+          <h2>Zusammenfassung der Diagramme</h2>
+          <p>Die fünf Diagramme visualisieren die Ergebnisse der Monte Carlo Simulation für den Wascherei-Betrieb mit einem Vergleich zwischen zwei Szenarien: ohne Rabatt (originales Modell) und mit Rabatt an Wochentagen (vorgeschlagenes Modell).</p>
+          
+          <div class="chart-point">
+            <strong>1. Umsatz (Revenue):</strong> Das erste Diagramm zeigt den täglichen Umsatz mit und ohne Rabatte. Trotz der Rabatte bleibt der Umsatz unter der Woche relativ stabil, während am Wochenende eine leichte Umsatzverschiebung erkennbar ist.
+          </div>
+          
+          <div class="chart-point">
+            <strong>2. Gewinn (Profit):</strong> Das zweite Diagramm stellt den täglichen Gewinn dar. Es zeigt, dass durch die Rabattstrategie eine gleichmäßigere Gewinnverteilung über die Woche erreicht wird, mit besonders positiven Effekten am Freitag.
+          </div>
+          
+          <div class="chart-point">
+            <strong>3. Kundenanzahl (Customers):</strong> Das dritte Diagramm zeigt die Verteilung der Kunden über die Woche. Die Rabattstrategie führt zu einer ausgewogeneren Verteilung mit mehr Kunden an Wochentagen und weniger am Wochenende.
+          </div>
+          
+          <div class="chart-point">
+            <strong>4. Verlorene Kunden (Lost Customers):</strong> Das vierte Diagramm illustriert die Anzahl der abgewiesenen Kunden pro Tag. Mit der Rabattstrategie werden deutlich weniger Kunden am Wochenende abgewiesen, was langfristig die Kundenbindung verbessert.
+          </div>
+          
+          <div class="chart-point">
+            <strong>5. Entgangener Umsatz (Lost Revenue):</strong> Das fünfte Diagramm zeigt den entgangenen Umsatz durch abgewiesene Kunden. Die Rabattstrategie minimiert den Umsatzverlust, besonders an Samstagen und Sonntagen.
+          </div>
+          
+          <p>Die Simulation demonstriert, dass eine gezielte Preispolitik mit Rabatten an Wochentagen zu einer besseren Auslastung der Wascherei führt, die Anzahl abgewiesener Kunden reduziert und langfristig die Wirtschaftlichkeit verbessert.</p>
+        </div>
+        
+        <div id="englishSummary" class="summary" style="display: none;">
+          <h2>Chart Summaries</h2>
+          <p>The five charts visualize the results of the Monte Carlo simulation for the laundry business, comparing two scenarios: without discounts (original model) and with weekday discounts (proposed model).</p>
+          
+          <div class="chart-point">
+            <strong>1. Revenue:</strong> The first chart shows daily revenue with and without discounts. Despite the discounts, weekday revenue remains relatively stable, while a slight revenue shift is noticeable on weekends.
+          </div>
+          
+          <div class="chart-point">
+            <strong>2. Profit:</strong> The second chart displays daily profit. It demonstrates that the discount strategy achieves a more even profit distribution throughout the week, with particularly positive effects on Fridays.
+          </div>
+          
+          <div class="chart-point">
+            <strong>3. Customer Numbers:</strong> The third chart shows the distribution of customers throughout the week. The discount strategy leads to a more balanced distribution with more customers on weekdays and fewer on weekends.
+          </div>
+          
+          <div class="chart-point">
+            <strong>4. Lost Customers:</strong> The fourth chart illustrates the number of turned away customers per day. With the discount strategy, significantly fewer customers are turned away on weekends, which improves customer retention in the long term.
+          </div>
+          
+          <div class="chart-point">
+            <strong>5. Lost Revenue:</strong> The fifth chart shows the revenue lost due to turned away customers. The discount strategy minimizes revenue loss, especially on Saturdays and Sundays.
+          </div>
+          
+          <p>The simulation demonstrates that a targeted pricing policy with weekday discounts leads to better utilization of the laundry facilities, reduces the number of rejected customers, and improves long-term economic viability.</p>
+        </div>
+        <button id="languageToggle" class="language-btn">Switch to English</button>
     </div>
 
     <br/>
@@ -224,6 +312,27 @@
         }
 
         fetchData();
+
+        const languageToggle = document.getElementById('languageToggle');
+        const germanSummary = document.getElementById('germanSummary');
+        const englishSummary = document.getElementById('englishSummary');
+        let isGerman = true;
+        
+        languageToggle.addEventListener('click', function() {
+        if (isGerman) {
+            germanSummary.style.display = 'none';
+            englishSummary.style.display = 'block';
+            languageToggle.textContent = 'Zu Deutsch wechseln';
+            document.documentElement.lang = 'en';
+            isGerman = false;
+        } else {
+            germanSummary.style.display = 'block';
+            englishSummary.style.display = 'none';
+            languageToggle.textContent = 'Switch to English';
+            document.documentElement.lang = 'de';
+            isGerman = true;
+        }
+        });
     </script>
 </body>
 </html>

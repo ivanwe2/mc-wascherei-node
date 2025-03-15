@@ -12,3 +12,4 @@
 - [Docs](/docs/Beleg1-MC-Wascherei-IvanRusev.md)
 - [Source Code](/src/simulation/sim.js)
 - [Deployment](https://mc-wascherei-node.onrender.com/)
+    - please note: may take up to a minute to spin up the server as it is a free trial version
